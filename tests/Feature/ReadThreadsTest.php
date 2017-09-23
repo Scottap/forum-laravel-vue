@@ -6,6 +6,8 @@ class ReadThreadsTest extends TestCase
 {
     use DatabaseMigrations;
 
+    protected $thread;
+
     public function setUp()
     {
         parent::setUp();
@@ -23,7 +25,7 @@ class ReadThreadsTest extends TestCase
     /** @test */
     public function aUserCanReadASingleThread()
     {
-        $this->get('/threads/' . $this->thread->id)
+        $this->get($this->thread->path())
             ->see($this->thread->title);
     }
 
@@ -34,7 +36,7 @@ class ReadThreadsTest extends TestCase
         $reply = factory('App\Reply')
             ->create(['thread_id' => $this->thread->id]);
 
-        $this->get('/threads/' . $this->thread->id)
+        $this->get($this->thread->path())
             ->see($reply->body);
 
     }

@@ -16,7 +16,6 @@ class ThreadTest extends TestCase
 
     }
 
-
     /** @test */
     public function itHasAnOwner()
     {
